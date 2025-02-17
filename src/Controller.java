@@ -1,3 +1,4 @@
+import model.Charaktere;
 import model.Produkte;
 
 import java.util.ArrayList;
@@ -13,6 +14,10 @@ public class Controller {
     public void alleProdukteAnschreiben(){
         for (Produkte produkt: service.alleProdukteZuruckgeben())
             System.out.println(produkt);
+    }
+    public void alleCharakterenAnschreiben(){
+        for (Charaktere charaktere: service.alleCharakterenZuruckgeben())
+            System.out.println(charaktere);
     }
 
     public void createProdukt(){
@@ -54,5 +59,55 @@ public class Controller {
         System.out.println("Name des Produktes, das geloescht werden soll: ");
         String name = sc.nextLine();
         service.deleteProdukt(name);
+    }
+
+    public void createCharaktere(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Name: ");
+        String name = sc.nextLine();
+        System.out.println("Ort: ");
+        String ort = sc.nextLine();
+
+        service.createACharaktere(name,ort);
+    }
+
+    public void showCharaktere(){
+        System.out.println("ID des Kundes:");
+        Scanner sc = new Scanner(System.in);
+        int id = sc.nextInt();
+        sc.nextLine();
+        System.out.println(service.getCharaktere(id));
+    }
+
+    public void updateCharaktereValidate(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("ID des Charakteres, das geandert werden soll: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Neuer Name: ");
+        String name = sc.nextLine();
+        System.out.println("Neuer Ort: ");
+        String ort = sc.nextLine();
+
+        Charaktere Charaktere = new Charaktere(id,name,ort,new ArrayList<>());
+        service.updateCharaktere(Charaktere);
+    }
+
+    public void deleteCharaktere(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("ID des Kunden, der geloescht werden soll: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+        service.deleteCharaktere(id);
+    }
+
+    public void charaktereNachOrtFiltrieren(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Ort: ");
+        String ort = sc.nextLine();
+        for (Charaktere Charaktere: service.filterNachOrt(ort))
+            System.out.println(Charaktere);
     }
 }

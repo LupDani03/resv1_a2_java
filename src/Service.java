@@ -1,3 +1,4 @@
+import model.Charaktere;
 import model.Produkte;
 
 import java.util.ArrayList;
@@ -7,9 +8,15 @@ import java.util.function.Predicate;
 public class Service {
 
     private Repository<Produkte> produktRepository;
+    private Repository<Charaktere> charaktereRepository;
 
-    public Service(Repository<Produkte> produktRepository) {
+    public Service(Repository<Charaktere> charaktereRepository, Repository<Produkte> produktRepository) {
+        this.charaktereRepository = charaktereRepository;
         this.produktRepository = produktRepository;
+    }
+
+    public List<Charaktere> alleCharakterenZuruckgeben() {
+        return charaktereRepository.getAllElements();
     }
 
     public List<Produkte> alleProdukteZuruckgeben() {
@@ -50,4 +57,51 @@ public class Service {
         }
     }
 
+    public void createACharaktere(String name, String ort){
+        int id = -1;
+        for (Charaktere k : charaktereRepository.getAllElements()){
+            if (id < k.getId())
+                id = k.getId();
+        }
+        id += 1;
+
+        charaktereRepository.addElement(new Charaktere(id,name,ort,new ArrayList<>()));
+    }
+
+    public Charaktere getCharaktere(int id){
+        for (Charaktere p : charaktereRepository.getAllElements()) {
+            if (p.getId() == id)
+                return p;
+        }
+        throw new RuntimeException("Charaktere nicht gefunden");
+    }
+
+    public void updateCharaktere(Charaktere Charaktere){
+        for (Charaktere p : charaktereRepository.getAllElements()){
+            if (p.getId() == Charaktere.getId()){
+                int index = charaktereRepository.getAllElements().indexOf(p);
+                p.setName(Charaktere.getName());
+                p.setOrt(Charaktere.getOrt());
+                charaktereRepository.updateElement(index,p);
+                break;
+            }
+        }
+    }
+
+    public void deleteCharaktere(int id){
+        for (Charaktere p : charaktereRepository.getAllElements()){
+            if (p.getId() == id){
+                charaktereRepository.remove(p);
+                break;
+            }
+        }
+    }
+
+
+    public List<Charaktere> filterNachOrt(String ort){
+        List<Charaktere> charaktereList = new ArrayList<>();
+        charaktereList = charaktereRepository.getAllElements().stream().filter(Charaktere -> ort.equals(Charaktere.getOrt())).toList();
+
+        return charaktereList;
+    }
 }
