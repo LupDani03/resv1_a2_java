@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Repository <T> {
+public class Repository<T> {
     private final List<T> repository;
 
     public Repository(List<T> repository) {
         this.repository = repository;
     }
+
     public Repository() {
         this.repository = new ArrayList<T>();
     }
@@ -23,7 +24,7 @@ public class Repository <T> {
         return repository.get(index);
     }
 
-    public void updateElement(int index,T t) {
+    public void updateElement(int index, T t) {
         repository.set(index, t);
     }
 

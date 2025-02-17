@@ -11,16 +11,17 @@ public class Controller {
         this.service = service;
     }
 
-    public void alleProdukteAnschreiben(){
-        for (Produkte produkt: service.alleProdukteZuruckgeben())
+    public void alleProdukteAnschreiben() {
+        for (Produkte produkt : service.alleProdukteZuruckgeben())
             System.out.println(produkt);
     }
-    public void alleCharakterenAnschreiben(){
-        for (Charaktere charaktere: service.alleCharakterenZuruckgeben())
+
+    public void alleCharakterenAnschreiben() {
+        for (Charaktere charaktere : service.alleCharakterenZuruckgeben())
             System.out.println(charaktere);
     }
 
-    public void createProdukt(){
+    public void createProdukt() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Name: ");
         String name = sc.nextLine();
@@ -33,7 +34,7 @@ public class Controller {
         service.createAProdukt(name, preis, herkunfstregion);
     }
 
-    public void showAProdukt(){
+    public void showAProdukt() {
         System.out.println("Gebe den Namen des Produktes ein: ");
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
@@ -41,7 +42,7 @@ public class Controller {
         System.out.println(produkt);
     }
 
-    public void updateProduktValidate(){
+    public void updateProduktValidate() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Name des Produktes, das geandert werden soll: ");
         String name = sc.nextLine();
@@ -54,24 +55,24 @@ public class Controller {
         service.updateProdukt(new Produkte(name, preis, herkunfstregion));
     }
 
-    public void deleteProdukt(){
+    public void deleteProdukt() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Name des Produktes, das geloescht werden soll: ");
         String name = sc.nextLine();
         service.deleteProdukt(name);
     }
 
-    public void createCharaktere(){
+    public void createCharaktere() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Name: ");
         String name = sc.nextLine();
         System.out.println("Ort: ");
         String ort = sc.nextLine();
 
-        service.createACharaktere(name,ort);
+        service.createACharaktere(name, ort);
     }
 
-    public void showCharaktere(){
+    public void showCharaktere() {
         System.out.println("ID des Kundes:");
         Scanner sc = new Scanner(System.in);
         int id = sc.nextInt();
@@ -79,7 +80,7 @@ public class Controller {
         System.out.println(service.getCharaktere(id));
     }
 
-    public void updateCharaktereValidate(){
+    public void updateCharaktereValidate() {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("ID des Charakteres, das geandert werden soll: ");
@@ -91,11 +92,11 @@ public class Controller {
         System.out.println("Neuer Ort: ");
         String ort = sc.nextLine();
 
-        Charaktere Charaktere = new Charaktere(id,name,ort,new ArrayList<>());
+        Charaktere Charaktere = new Charaktere(id, name, ort, new ArrayList<>());
         service.updateCharaktere(Charaktere);
     }
 
-    public void deleteCharaktere(){
+    public void deleteCharaktere() {
         Scanner sc = new Scanner(System.in);
         System.out.println("ID des Kunden, der geloescht werden soll: ");
         int id = sc.nextInt();
@@ -103,11 +104,11 @@ public class Controller {
         service.deleteCharaktere(id);
     }
 
-    public void charaktereNachOrtFiltrieren(){
+    public void charaktereNachOrtFiltrieren() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Ort: ");
         String ort = sc.nextLine();
-        for (Charaktere Charaktere: service.filterNachOrt(ort))
+        for (Charaktere Charaktere : service.filterNachOrt(ort))
             System.out.println(Charaktere);
     }
 }

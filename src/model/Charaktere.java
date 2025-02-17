@@ -15,7 +15,8 @@ public class Charaktere {
         this.listeProdukte = listeProdukte;
     }
 
-    public Charaktere() {}
+    public Charaktere() {
+    }
 
     public int getId() {
         return id;
@@ -59,7 +60,7 @@ public class Charaktere {
                 '}';
     }
 
-    public boolean richtigeRegion(String herkunfstRegion){
+    public boolean richtigeRegion(String herkunfstRegion) {
         for (Produkte p : this.listeProdukte) {
             if (p.getHerkunfstregion().equals(herkunfstRegion)) {
                 return true;
